@@ -14,7 +14,7 @@ const users = new Set();
 io.on("connection", (socket) => {
   console.log("A user is now connected");
 
-  //handle when tthey join
+  //handle when they join
   socket.on("join", (userName) => {
     users.add(userName);
     socket.userName = userName;
@@ -26,11 +26,12 @@ io.on("connection", (socket) => {
     io.emit("userList", Array.from(users));
   });
 
-  //incoming chat messages
+//incoming chat messages
   socket.on("chatMessage", (message) => {
     //broadcast
     io.emit("chatMessage", message);
   });
+
 
   //user disconnection
 socket.on("disconnect", () => {
